@@ -1,0 +1,4 @@
+### Some regex that might be usefull
+
+# Identifies a Java comment block or line
+(\/\*((?!\*\/)[\S\s])*\*\/)|(\/\/.*)
