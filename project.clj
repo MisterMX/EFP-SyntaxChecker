@@ -20,9 +20,14 @@
   :aliases
   {"test-all" ["with-profile" "default:+1.8" "test"]}
   :profiles
-  {:dev {
-    :jvm-opts ^:replace []
-    :dependencies [[ring/ring-mock "0.3.0"]
-                  [criterium "0.4.4"]
-                  [javax.servlet/servlet-api "2.5"]]}
-    :1.8 {:dependencies [[org.clojure/clojure "1.8.0"]]}})
+  {
+    :dev {
+      :jvm-opts ^:replace []
+      :dependencies [[ring/ring-mock "0.3.0"]
+                    [criterium "0.4.4"]
+                    [javax.servlet/servlet-api "2.5"]]}
+    :1.8 {:dependencies [[org.clojure/clojure "1.8.0"]]}
+    :debug-repl {
+      :resource-paths [#=(eval (System/getenv "PATH_TO_TOOLS_JAR"))]
+      :repl-options {:nrepl-middleware [debug-middleware.core/debug-middleware]}
+      :dependencies [[debug-middleware #=(eval (System/getenv "DEBUG_MIDDLEWARE_VERSION"))]]}})
