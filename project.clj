@@ -9,9 +9,11 @@
                  [medley "1.0.0"]
                  [ring "1.6.1"]
                  [ring/ring-codec "1.0.1"]
+                 [ring/ring-jetty-adapter "1.6.1"]
                  [compojure "1.6.0"]]
   :plugins [[lein-codox "0.10.3"]
-            [lein-ring "0.12.0"]]
+            [lein-ring "0.12.0"]
+            [lein-ring-jetty "0.1.0-SNAPSHOT"]]
   :ring {:handler efp_syntaxchecker.core/app}
   :codox
   {:output-path "codox"
