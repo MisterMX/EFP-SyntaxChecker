@@ -13,23 +13,11 @@
                  [compojure "1.6.0"]]
   :plugins [[lein-codox "0.10.3"]
             [lein-ring "0.12.0"]
+            [lein-run "1.0.0"]
             [lein-ring-jetty "0.1.0-SNAPSHOT"]]
-  :ring {:handler efp_syntaxchecker.core/app}
+  :main efp_syntaxchecker.core
+  :run-aliases {:server [efp_syntaxchecker.core -main]}
   :codox
   {:output-path "codox"
    :metadata {:doc/format :markdown}
-   :source-uri "http://github.com/weavejester/compojure/blob/{version}/{filepath}#L{line}"}
-  :aliases
-  {"test-all" ["with-profile" "default:+1.8" "test"]}
-  :profiles
-  {
-    :dev {
-      :jvm-opts ^:replace []
-      :dependencies [[ring/ring-mock "0.3.0"]
-                    [criterium "0.4.4"]
-                    [javax.servlet/servlet-api "2.5"]]}
-    :1.8 {:dependencies [[org.clojure/clojure "1.8.0"]]}
-    :debug-repl {
-      :resource-paths [#=(eval (System/getenv "PATH_TO_TOOLS_JAR"))]
-      :repl-options {:nrepl-middleware [debug-middleware.core/debug-middleware]}
-      :dependencies [[debug-middleware #=(eval (System/getenv "DEBUG_MIDDLEWARE_VERSION"))]]}})
+   :source-uri "http://github.com/weavejester/compojure/blob/{version}/{filepath}#L{line}"})
