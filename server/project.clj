@@ -10,6 +10,7 @@
                  [ring "1.6.1"]
                  [ring/ring-codec "1.0.1"]
                  [ring/ring-jetty-adapter "1.6.1"]
+                 [ring/ring-json "0.4.0"]
                  [compojure "1.6.0"]]
   :plugins [[lein-codox "0.10.3"]
             [lein-ring "0.12.0"]
