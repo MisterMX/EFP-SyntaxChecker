@@ -3,13 +3,13 @@
         ring.adapter.jetty
         ring.util.response)
   (:require 
+    [efp_syntaxchecker.config :as config]
     [compojure.core :refer :all]
     [compojure.route :as route]
     [ring.middleware.json :refer :all]
-    [efp_syntaxchecker.config :as config]))
-
-(defn getText [request]
-  (str request " test"))
+    [ring.middleware.content-type :refer :all]
+    [ring.middleware.params :refer :all]
+    [ring.util.json-response :refer :all]))
 
 (defn getTaskList []
   (map 
@@ -22,7 +22,8 @@
 
 (defroutes app-routes
   (GET "/api/tasks" [] (response (getTaskList)))
-  (POST "/api" {body :body} (slurp body))
+  ; Moodle request is application/urlencoded -> data is in :params.
+  (POST "/api" {params :params {userId :user_id} :body} (response {:user_id userId :params params}))
   (route/not-found "Page not found"))
 
 ;---
@@ -31,9 +32,10 @@
 
 (def app
   (-> app-routes
-    wrap-json-params
-    wrap-json-body
-    wrap-json-response))
+    ; (wrap-content-type {:mime-types ["application/json"]})
+    (wrap-json-body {:keywords? true :bigdecimals? true})
+    (wrap-params)
+    (wrap-json-response)))
 
 (defn start-server []
   (run-jetty app
