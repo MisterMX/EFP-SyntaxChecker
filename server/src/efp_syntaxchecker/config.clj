@@ -3,6 +3,7 @@
       [efp_syntaxchecker.tasks.task1 :as task1]
       [efp_syntaxchecker.tasks.task2 :as task2]))
 
+; Define the tasks that are offered by this webservice here:
 (def task-map {
   :task1 {
     :name "task1"
