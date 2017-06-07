@@ -5,6 +5,8 @@
         [ring.adapter.jetty]
         [ring.util.response]
         [clojure.java.io]
+        [efp_syntaxchecker.views.upload]
+        [efp_syntaxchecker.views.tasks]
         [efp_syntaxchecker.views.main])
 
   (:require 
@@ -21,7 +23,9 @@
 
 (defroutes app-routes
   (GET "/" [] (index-page))
-  (GET "/api/tasks" [] (response (config-util/getTaskList)))
+  (GET "/api/upload" [] (upload-page))
+  (GET "/api/tasks" [] (tasks-page))
+  
   (POST "/api/execute" {body :body} (response (task-execution/executeTaskRequest body)))
   ; Moodle request is application/urlencoded -> data is in :params.
   (POST "/api" {params :params {userId :user_id} :body} (response {:user_id userId :params params}))
@@ -29,7 +33,7 @@
   ; HTTP-Form upload is multipart/form-data
   ; params enthält Map des Uploads - Key = "file" -> 
   ; {file [{:filename Customer.java, :content-type text/x-java, :tempfile #object[java.io.File 0x25641dd9 /tmp/ring-multipart-8681951062682279797.tmp], :size 1567}]}
-  (POST "/upload" {params :params}
+  (POST "/api/upload" {params :params}
     (println params)
     (let [file (get params "file")]
       (response (get file :tempfile))))
