@@ -1,5 +1,6 @@
 (ns efp_syntaxchecker.core
   (:use compojure.core
+        efp_syntaxchecker.views.main
         ring.adapter.jetty
         ring.util.response)
   (:require 
@@ -9,13 +10,21 @@
     [compojure.route :as route]
     [ring.middleware.json :refer :all]
     [ring.middleware.params :refer :all]
-    [ring.util.json-response :refer :all]))
+    [ring.util.json-response :refer :all]
+    [hiccup.middleware :only (wrap-base-url)]))
 
 (defroutes app-routes
+  (GET "/" [] (index-page))
   (GET "/api/tasks" [] (response (config-util/getTaskList)))
   (POST "/api/execute" {body :body} (response (task-execution/executeTaskRequest body)))
   ; Moodle request is application/urlencoded -> data is in :params.
   (POST "/api" {params :params {userId :user_id} :body} (response {:user_id userId :params params}))
+
+  ; TODO - multipart-params is always nil or {} 
+  (POST "/upload" {params :params}
+    (slurp params)
+    (response (str params)))
+
   (route/not-found "Page not found"))
 
 ;---
@@ -26,6 +35,7 @@
   (-> app-routes
     (wrap-json-body {:keywords? true :bigdecimals? true})
     (wrap-params)
+    (wrap-multipart-params)
     (wrap-json-response)))
 
 (defn start-server []
