@@ -7,6 +7,8 @@
       [:title "EFP-SyntaxChecker"]]
     [:body
       [:h1 "EFP-SyntaxChecker"]
-      [:form {:action "http://localhost:8080/upload" :method "post" :enctype "multipart/form-data"}
-        [:input {:name "file" :type "file"}]
-        [:input {:type "submit" :name "submit" :value "submit"}]]]))
+      [:div {:class "mainContent"}
+        [:h2 "Menu:"]
+        [:ul
+          [:li [:a {:href "http://localhost:8080/api/upload"} "File Upload"]]
+          [:li [:a {:href "http://localhost:8080/api/tasks"} "Tasks"]]]]]))
