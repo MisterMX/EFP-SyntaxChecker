@@ -11,7 +11,13 @@
     [ring.middleware.json :refer :all]
     [ring.middleware.params :refer :all]
     [ring.util.json-response :refer :all]
+    [clojure.java.io :as io]
     [hiccup.middleware :only (wrap-base-url)]))
+
+(defn write-file [params]
+  (with-open [w (io/writer  "tmp/input.txt" :append true)]
+    (.write w (str params))))
+
 
 (defroutes app-routes
   (GET "/" [] (index-page))
@@ -22,11 +28,12 @@
 
   ; TODO - multipart-params is always nil or {} 
   (POST "/upload" {params :params}
-    (slurp params)
+    (def file 
+      (println params))
+    (write-file file)
     (response (str params)))
 
   (route/not-found "Page not found"))
-
 ;---
 ;Startup
 ;---
@@ -35,7 +42,6 @@
   (-> app-routes
     (wrap-json-body {:keywords? true :bigdecimals? true})
     (wrap-params)
-    (wrap-multipart-params)
     (wrap-json-response)))
 
 (defn start-server []
