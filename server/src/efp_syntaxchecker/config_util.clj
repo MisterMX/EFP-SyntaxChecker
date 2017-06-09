@@ -11,6 +11,10 @@
     config/task-map))
 
 (defn getTask [name]
-  (if (nil? (get config/task-map name))
+  ; (def task (some #(= name %) config/task-map))
+  ; (if (nil? task))
+  ;   (throw (Exception. (str "No task with name " name)))
+  ;   (config/task-map name)))
+  (if (nil? (config/task-map (keyword name)))
     (throw (Exception. (str "No task with name " name)))
-    (config/task-map name)))
+    (config/task-map (keyword name))))
