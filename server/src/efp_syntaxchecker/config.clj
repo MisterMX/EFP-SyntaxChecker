@@ -8,12 +8,20 @@
   :task1 {
     :name "task1"
     :triggers {
-      :trigger1 {:handler task1/task1Handler}
-      :trigger2 {:handler task1/task2Handler}}
+      :trigger1 {
+        :handler task1/task1Handler
+        :errorMsg "Error"}
+      :trigger2 {
+        :handler task1/task2Handler
+        :errorMsg "Error"}}
   }
   :task2 {
     :name "task2"
     :triggers {
-      :trigger1 {:handler task2/task1Handler}
-      :trigger2 {:handler task2/task2Handler}}
+      :trigger1 {
+        :handler task2/task1Handler
+        :errorMsg "Error"}
+      :trigger2 {
+        :handler task2/task2Handler
+        :errorMsg "Error"}}
   }})

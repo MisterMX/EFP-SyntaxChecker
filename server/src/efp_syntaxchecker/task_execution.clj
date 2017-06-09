@@ -2,10 +2,16 @@
   (:require [efp_syntaxchecker.config-util :as config-util]))
 
 (defn executeTrigger [trigger triggerName files]
-  {
-    :name triggerName
-    :success? true
-  })
+  (if ((:handler trigger) files)
+    {
+      :name triggerName
+      :success? true
+    }
+    {
+      :name triggerName
+      :success? false
+      :message (:errorMsg trigger)
+    }))
 
 (defn executeTask [task files]
   (map
