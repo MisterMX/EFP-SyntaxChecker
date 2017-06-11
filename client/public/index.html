@@ -1,37 +1,126 @@
-<!--  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license.
-        See LICENSE in the source repository root for complete license information. -->
-
 <!DOCTYPE html>
-<html ng-app="app">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Microsoft Graph Connect sample</title>
-  <base href="/">
-
-  <!-- Third party dependencies. -->
-  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.css">
-  <link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-route.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.8.0/loading-bar.css">
-  <script src="./bower_components/hello/dist/hello.all.js"></script>
-	<script src="./bower_components/hello/src/hello.polyfill.js"></script>
-	<script src="./bower_components/hello/src/hello.js"></script>
-
-  <!-- App code. -->
-  <script src="/scripts/config.js"></script>
-  <script src="/scripts/app.js"></script>
-  <script src="/scripts/aad.js"></script>
-  <script src="/scripts/graphHelper.js"></script>
-  <script src="/controllers/mainController.js"></script>  
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    
+    <!-- Mobile First -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Import JQuery and Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- Import Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    
+    <!-- Import Main Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!-- Import Site JavaScript -->
+    <script language="javascript" type="text/javascript" src="js/createJSONPost.js"></script>
 </head>
 
-<body class="ms-Grid">
-  <div ng-controller="MainController as main" ng-include="'views/main.html'"></div>
-</body>
+<!-- Start Body -->
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="50">
+    
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#home">EFP-SyntaxChecker</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+          <li><a href="#header">HOME</a></li>
+          <li><a href="#fileUpload">FILE UPLOAD</a></li>
+          <li><a href="#about">ABOUT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
+<!-- Header -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+          <img src="img/header.jpg" alt="header" width="1200" height="200">
+          <div class="carousel-caption">
+          </div>      
+      </div>
+    </div>
+</div>
+
+<!-- Container - Home -->
+<div id="header" class="container text-center">
+  <h3>EFP-SyntaxChecker</h3>
+    <p><em>blablablablablablablablablablablablabal</em></p>
+</div>
+    
+<!-- Container - File Upload -->
+<div id="fileUpload" class="bg-1">
+  <div class="container">
+    <h3 class="text-center">FILE UPLOAD</h3>
+    <p class="text-center">Please Upload the File(s)</p>
+    <form method="post" enctype="multipart/form-data" action="wrapFileInJSON()">
+        <input name="datei" type="file" multiple> 
+        <button>Upload</button>
+    </form>
+  </div>
+</div>
+    
+<!-- Container - About -->
+<div id="about" class="container">
+    <h3 class="text-center">About</h3>
+    <p class="text-center">8A:D0:97:D0:79:3E:43:ED:18:87:79:44:24:EA:6E:66
+        38:E5:5F:F4:DC:2C:40:C6:D6:A8:D6:02:13:2D:46:42</p>
+</div>
+    
+<!-- Container - Footer -->
+<footer class="text-center">
+  <a class="up-arrow" href="#home" data-toggle="tooltip" title="top">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>designed by - <a href="https://ezlife.eu" data-toggle="tooltip" title="ezlife">ezlife.eu</a></p> 
+</footer>
+
+<!-- smooth Website scrolling -->
+<script>
+$(document).ready(function(){
+  // Initialize Tooltip
+  $('[data-toggle="tooltip"]').tooltip(); 
+  // Add smooth scrolling to all links in navbar + footer link
+  $(".navbar a, footer a[href='#home']").on('click', function(event) {
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+      // Store hash
+      var hash = this.hash;
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 900, function(){
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+})
+</script>
+
+</body>
 </html>
