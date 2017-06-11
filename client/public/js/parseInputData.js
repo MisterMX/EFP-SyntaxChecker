@@ -64,9 +64,7 @@ function uploadJSON() {
             selected.push(checkboxes[i].value);
         }
     }
-    jsonUpload.tasks.push({ 
-                        "taskName" : selected
-                    });
+    jsonUpload.tasks.push(selected);  
     
     alert(JSON.stringify(jsonUpload));
     
