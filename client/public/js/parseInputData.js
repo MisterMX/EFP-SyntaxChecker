@@ -41,7 +41,7 @@ function createTasks() {
             body += "<tr>";
             body += "<td>" + data[i].name + "</td>";
             body += "<td>" + data[i].triggers[0].name + "</td>";
-            body += "<td><img src='img/icons/working.png'</td>";
+            body += "<td><img src='img/icons/working.png' width='50px' height='50px'</td>";
             body += "<td><input type='checkbox' name='task' value='" + data[i].name + "'></td>";
             body += "</tr>";
         }
