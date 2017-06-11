@@ -47,6 +47,7 @@ function createTasks() {
         }
         
         body += "</tbody>";
+        body += "</table>";
         document.getElementById("tasksTable").innerHTML = body;
    })
 }
