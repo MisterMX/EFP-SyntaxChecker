@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8">
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
-    
+
     <!-- Mobile First -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Import JQuery and Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
+
     <!-- Import Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-    
+
     <!-- Import Main Stylesheet -->
     <link href="css/style.css" rel="stylesheet" type="text/css">
     <!-- Import Site JavaScript -->
@@ -23,100 +23,101 @@
 </head>
 
 <!-- Start Body -->
+
 <body id="home" data-spy="scroll" data-target=".navbar" data-offset="50">
-    
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#home">EFP-SyntaxChecker</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-          <li><a href="#header">HOME</a></li>
-          <li><a href="#content">FILE UPLOAD</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+                <a class="navbar-brand" href="#home">EFP-SyntaxChecker</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#header">HOME</a></li>
+                    <li><a href="#content">FILE UPLOAD</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-<!-- Container - Home -->
-<div id="header" class="container text-center">
-  <h3>EFP-SyntaxChecker</h3>
-    <p><em>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</em></p>
-</div>
-    
-<!-- Container - Content -->
-<div id="content" >
-  <div class="container">
-      <!-- handle file upload -->
-      <div class="row">
-        <h3 class="text-center">FILE UPLOAD</h3>
-        <p class="text-center">Please upload the File(s)</p> 
-        <form enctype="multipart/form-data">
-            <input type="file" id="fileinput" multiple />
-            <!-- inline Javascript to handle uploaded File content -->
-            <script>
-                // add listener to File Input Form
-                document.getElementById('fileinput').addEventListener('change', readMultipleFiles, false);
-            </script>    
-        </form><br>
-      </div>
-      <!-- select desired tasks -->
-      <div class="row">
-        <h3 class="text-center">TASKS</h3>
-        <p class="text-center">Please select the desired tasks</p>
-        <div id="tasksTable">
-             <!-- inline Javascript to load tasks from backend - this needs cross-site-requests enabled -->
-             <script>createTasks();</script>
-          </div>
-      </div>
-      <!-- upload the prepared JSON to the clojure server -->
-      <div class="row" style="text-align:center;">
-        <h3 class="text-center">UPLOAD & VALIDATE</h3>
-        <button onclick="uploadJSON()">Upload</button>
-      </div>
-  </div>
-</div>
-    
-<!-- Container - Footer -->
-<footer class="text-center">
-  <a class="up-arrow" href="#home" data-toggle="tooltip" title="top">
-    <span class="glyphicon glyphicon-chevron-up"></span>
-  </a><br><br>
-  <p>footer here...</p> 
-</footer>
+    <!-- Container - Home -->
+    <div id="header" class="container text-center">
+        <h3>EFP-SyntaxChecker</h3>
+        <p><em>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</em></p>
+    </div>
 
-<!-- smooth Website scrolling -->
-<script>
-$(document).ready(function(){
-  // Initialize Tooltip
-  $('[data-toggle="tooltip"]').tooltip(); 
-  // Add smooth scrolling to all links in navbar + footer link
-  $(".navbar a, footer a[href='#home']").on('click', function(event) {
-    // Make sure this.hash has a value before overriding default behavior
-    if (this.hash !== "") {
-      // Prevent default anchor click behavior
-      event.preventDefault();
-      // Store hash
-      var hash = this.hash;
-      // Using jQuery's animate() method to add smooth page scroll
-      // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
-      $('html, body').animate({
-        scrollTop: $(hash).offset().top
-      }, 900, function(){
-        // Add hash (#) to URL when done scrolling (default click behavior)
-        window.location.hash = hash;
-      });
-    } // End if
-  });
-})
-</script>
+    <!-- Container - Content -->
+    <div id="content" class="container text-center">
+        <!-- handle file upload -->
+        <div class="row">
+            <h3 class="text-center">FILE UPLOAD</h3>
+            <p class="text-center">Please upload the File(s)</p>
+            <form enctype="multipart/form-data">
+                <input type="file" id="fileinput" multiple />
+                <!-- inline Javascript to handle uploaded File content -->
+                <script>
+                    // add listener to File Input Form
+                    document.getElementById('fileinput').addEventListener('change', readMultipleFiles, false);
+                </script>
+            </form><br>
+        </div>
+        <!-- select desired tasks -->
+        <div class="row">
+            <h3 class="text-center">TASKS</h3>
+            <p class="text-center">Please select the desired tasks</p>
+            <div id="tasksTable">
+                <!-- inline Javascript to load tasks from backend - this needs cross-site-requests enabled -->
+                <script>
+                    createTasks();
+                </script>
+            </div>
+        </div>
+        <!-- upload the prepared JSON to the clojure server -->
+        <div class="row" style="text-align:center;">
+            <h3 class="text-center">UPLOAD & VALIDATE</h3>
+            <button onclick="uploadJSON()">Upload</button>
+        </div>
+    </div>
+
+    <!-- Container - Footer -->
+    <footer class="text-center">
+        <a class="up-arrow" href="#home" data-toggle="tooltip" title="top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a><br><br>
+        <p>footer here...</p>
+    </footer>
+
+    <!-- smooth Website scrolling -->
+    <script>
+        $(document).ready(function() {
+            // Initialize Tooltip
+            $('[data-toggle="tooltip"]').tooltip();
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar a, footer a[href='#home']").on('click', function(event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+                    // Store hash
+                    var hash = this.hash;
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function() {
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+        })
+    </script>
 
 </body>
 </html>
