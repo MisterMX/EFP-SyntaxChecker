@@ -6,7 +6,8 @@ The Data upload is handled by a HTML input form. The uploaded multipart/form-dat
 ```
 function readMultipleFiles(evt)
 ```
-## REST Interfaces
+
+## REST Interface
 
 ### GET /api/tasks
 
@@ -25,6 +26,7 @@ Executes a given task.
 ```
 function uploadJSON()
 ```
+
 Uploads the Data in the following JSON format. Example:
 ```
 { "taskName" : "task2",
@@ -37,4 +39,18 @@ Uploads the Data in the following JSON format. Example:
         :main my-website.server)\n
         \n
         "}]}
+```
+
+Visualization of the response is done in
+```
+function displayValidationResponse(data)
+```
+
+## Bugs/Todo
+
+- HTTPS Webserver for moodle integration
+
+GET Method http://localhost:8080/api/tasks does not give the array of trigger and their names.
+```
+[{"name":"task1","triggers":["triggers"]},{"name":"task2","triggers":["triggers"]}]
 ```
