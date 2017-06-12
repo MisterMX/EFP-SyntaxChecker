@@ -3,6 +3,24 @@ var jsonUpload = {
     files: []
 };
 
+function readTasks() {
+    var list = document.getElementById("taskSelector"); 
+    
+    $.getJSON("http://localhost:8080/api/tasks", function(data) {
+        for(var i = 0; i < data.length; i++) {
+            var opt = data[i].name;
+            var li = document.createElement("li");
+            var link = document.createElement("a");
+            var text = document.createTextNode(opt);
+            
+            link.appendChild(text);
+            link.href = "#";
+            li.appendChild(link);
+            list.appendChild(li);
+        }
+   })
+}
+
 function readMultipleFiles(evt) {
     // reset the field
     jsonUpload.files = [];
