@@ -6,7 +6,7 @@
     (fn [[taskName task]]
       {
         :name taskName
-        :triggers (map (fn [[triggerName trigger]] triggerName ) {"triggers" :task})
+        :triggers (map (fn [[triggerName trigger]] triggerName) (:triggers task))
       })
     config/task-map))
 
