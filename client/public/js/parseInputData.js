@@ -4,19 +4,19 @@ var jsonUpload = {
 };
 
 function readTasks() {
-    var list = document.getElementById("taskSelector"); 
-    
-    $.getJSON("http://localhost:8080/api/tasks", function(data) {
-        for(var i = 0; i < data.length; i++) {
+    var list = document.getElementById("taskSelector");
+
+    $.getJSON("http://localhost:8080/api/tasks", function (data) {
+        for (var i = 0; i < data.length; i++) {
             var opt = data[i].name;
             var li = document.createElement("li");
             var link = document.createElement("a");
             var text = document.createTextNode(opt);
-            
+
             link.appendChild(text);
             link.href = "#";
-            
-            link.onclick = function() {
+
+            link.onclick = function () {
                 createTriggerTable(opt);
                 // reset the field
                 jsonUpload.taskName = opt;
@@ -24,7 +24,7 @@ function readTasks() {
             li.appendChild(link);
             list.appendChild(li);
         }
-   })
+    })
 }
 
 function createTriggerTable(triggerName) {
@@ -34,47 +34,47 @@ function createTriggerTable(triggerName) {
     body += "</thead>";
     body += "<tbody>";
     // parse JSON with jQuery
-    $.getJSON("http://localhost:8080/api/tasks", function(data) {
-        for(var i = 0; i < data.length; i++) {
-            if(data[i].name == triggerName) {
-                for(var j = 0; j < data[i].triggers.length; j++) {
+    $.getJSON("http://localhost:8080/api/tasks", function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name == triggerName) {
+                for (var j = 0; j < data[i].triggers.length; j++) {
                     body += "<tr>";
-                    body += "<td>" + j+1 + "</td>";
+                    body += "<td>" + j + 1 + "</td>";
                     body += "<td>" + data[i].triggers[j] + "</td>";
                     body += "<td><img src='img/icons/working.png' width='50px' height='50px'</td>";
                     body += "</tr>";
                 }
-            }            
+            }
         }
-        
+
         body += "</tbody>";
         body += "</table>";
         document.getElementById("triggerTable").innerHTML = body;
-   })
+    })
 }
 
 function readMultipleFiles(evt) {
     // reset the field
     jsonUpload.files = [];
     // retrieve the files from input
-    var files = evt.target.files; 
+    var files = evt.target.files;
     if (files) {
-        for (var i=0, f; f=files[i]; i++) {
+        for (var i = 0, f; f = files[i]; i++) {
             var r = new FileReader();
-            r.onload = (function(f) {
-                
-                return function(e) {
+            r.onload = (function (f) {
+
+                return function (e) {
                     // create JSON object
-                    jsonUpload.files.push({ 
-                        "filename" : f.name,
-                        "content"  : e.target.result 
+                    jsonUpload.files.push({
+                        "filename": f.name,
+                        "content": e.target.result
                     });
                 };
             })(f);
             r.readAsText(f);
         }
     } else {
-        alert("Failed to load files"); 
+        alert("Failed to load files");
     }
 }
 
@@ -82,13 +82,14 @@ function uploadJSON() {
     alert(JSON.stringify(jsonUpload));
     // upload data to server
     $.ajax({
-            url: 'http://localhost:8080/api/execute',
-            type: 'post',
-            dataType: 'json',
-            success: function (data) {
-                
-                // TODO - get the result from server in callback
-            },
-            data: jsonUpload
+        url: 'http://localhost:8080/api/execute',
+        type: 'POST',
+        data: JSON.stringify(jsonUpload),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            
+            // TODO - get the result from server in callback
+        },
     });
 }
