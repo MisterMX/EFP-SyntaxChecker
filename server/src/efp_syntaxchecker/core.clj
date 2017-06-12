@@ -9,7 +9,8 @@
     [compojure.route :as route]
     [ring.middleware.json :refer :all]
     [ring.middleware.params :refer :all]
-    [ring.util.json-response :refer :all]))
+    [ring.util.json-response :refer :all]
+    [ring.middleware.cors :refer [wrap-cors]]))
 
 (defroutes app-routes
   (GET "/api/tasks" [] (response (config-util/getTaskList)))
@@ -22,11 +23,15 @@
 ;Startup
 ;---
 
+
+
 (def app
   (-> app-routes
     (wrap-json-body {:keywords? true :bigdecimals? true})
     (wrap-params)
-    (wrap-json-response)))
+    (wrap-json-response)
+    (wrap-cors app-routes #".*")
+    (wrap-cors app-routes identity)))
 
 (defn start-server []
   (run-jetty app
