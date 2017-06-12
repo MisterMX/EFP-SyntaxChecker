@@ -1,36 +1,52 @@
 # efp-syntaxchecker
 
-FIXME: description
+## Webservice API
 
-## Installation
+### GET /api/tasks
 
-Download from http://example.com/FIXME.
+Gets a list of all task and there triggers.
 
-## Usage
+No request body is required.
 
-FIXME: explanation
+Response body format:
+```
+[
+    {
+        "name": <taskname>,
+        "triggers": [
+            {
+                "name": <triggername>
+            },
+            ...
+        ]
+    },
+    ...
+]
+```
 
-    $ java -jar efp-syntaxchecker-0.1.0-standalone.jar [args]
+### POST /api/execute
 
-## Options
+Execute a given task.
 
-FIXME: listing of options this app accepts.
+Request body format:
+```
+{
+    taskName: <taskName>,
+    files: [
+        <filename>: <content>,
+        ...
+    ]
+}
+```
 
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2017 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Response body format:
+```
+[
+    {
+        "name": <triggername>,
+        "success": <true|false>,
+        "message": <string (if success === false)>
+    },
+    ...
+]
+```
