@@ -47,57 +47,60 @@
         </div>
     </nav>
 
-    <!-- Container - Home -->
-    <div id="header" class="container text-center">
-        <h3>EFP-SyntaxChecker</h3>
-        <p><em>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</em></p>
-    </div>
-
     <!-- Container - Content -->
     <div id="content" class="container text-center">
-        <!-- handle task selection -->
-        <h3 class="text-center">TASK SELECTION</h3>
-        <p class="text-center">Please select the desired task</p>
-        <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Task
-            <span class="caret"></span></button>
-            <ul class="dropdown-menu" id="taskSelector">
-                <!-- read tasks from backend API -->
-                <script>readTasks();</script>
-            </ul>
+        <!-- information -->
+        <div class="row">
+            <h3>EFP-SyntaxChecker</h3>
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
         </div>
-        
+        <br>
+        <!-- handle task selection -->
+        <div class="row">
+            <h3 class="text-center">TASK SELECTION</h3>
+            <p class="text-center">Please select the desired task</p>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Task selection
+            <span class="caret"></span></button>
+                <ul class="dropdown-menu" id="taskSelector">
+                    <!-- read tasks from backend API -->
+                    <script>
+                        readTasks();
+                    </script>
+                </ul>
+            </div>
+        </div>
+        <br>
         <!-- select desired tasks -->
         <div class="row">
             <h3 class="text-center">TRIGGER</h3>
             <p class="text-center">Please select the desired triggers</p>
-            <div id="tasksTable">
+            <div id="triggerTable">
+                <p><b>Please select a Task</b></p>
                 <!-- inline Javascript to load tasks from backend - this needs cross-site-requests enabled -->
-                <script>
-                    createTasks();
-
-                </script>
             </div>
         </div>
-        
+        <br>
         <!-- handle file upload -->
         <div class="row">
             <h3 class="text-center">FILE UPLOAD</h3>
             <p class="text-center">Please upload the File(s)</p>
-            <form enctype="multipart/form-data">
-                <input type="file" id="fileinput" multiple />
-                <!-- inline Javascript to handle uploaded File content -->
-                <script>
-                    // add listener to File Input Form
-                    document.getElementById('fileinput').addEventListener('change', readMultipleFiles, false);
-                </script>
-            </form><br>
+            <center>
+                <form enctype="multipart/form-data">
+                    <input type="file" id="fileinput" multiple />
+                    <!-- inline Javascript to handle uploaded File content -->
+                    <script>
+                        // add listener to File Input Form
+                        document.getElementById('fileinput').addEventListener('change', readMultipleFiles, false);
+                    </script>
+                </form>
+            </center>
         </div>
-        
+        <br>
         <!-- upload the prepared JSON to the clojure server -->
         <div class="row" style="text-align:center;">
-            <h3 class="text-center">UPLOAD & VALIDATE</h3>
-            <button onclick="uploadJSON()">Upload</button>
+            <h3 class="text-center">VALIDATE</h3>
+            <button onclick="uploadJSON()">OK</button>
         </div>
     </div>
 
@@ -130,10 +133,9 @@
                         // Add hash (#) to URL when done scrolling (default click behavior)
                         window.location.hash = hash;
                     });
-                } // End if
+                }
             });
         })
-
     </script>
 
 </body>
