@@ -1,22 +1,40 @@
 (ns efp_syntaxchecker.core
   (:use compojure.core
-        ring.adapter.jetty)
-  (:require [[compojure.route :as route]
-             [ring.middleware.json :refer [wrap-json-response]]]))
-
-(defn getText [request]
-  (str request " test"))
+        ring.adapter.jetty
+        ring.util.response)
+  (:require 
+    [efp_syntaxchecker.config-util :as config-util]
+    [efp_syntaxchecker.task-execution :as task-execution]
+    [compojure.core :refer :all]
+    [compojure.route :as route]
+    [ring.middleware.json :refer :all]
+    [ring.middleware.params :refer :all]
+    [ring.util.json-response :refer :all]
+    [ring.middleware.cors :refer [wrap-cors]]))
 
 (defroutes app-routes
-  (POST "/api" {body :body} (slurp body))
+  (GET "/api/tasks" [] (response (config-util/getTaskList)))
+  (POST "/api/execute" {body :body} (response (task-execution/executeTaskRequest body)))
+  ; Moodle request is application/urlencoded -> data is in :params.
+  (POST "/api" {params :params {userId :user_id} :body} (response {:user_id userId :params params}))
   (route/not-found "Page not found"))
+
+;---
+;Startup
+;---
+
+
 
 (def app
   (-> app-routes
-    wrap-json-params))
+    (wrap-json-body {:keywords? true :bigdecimals? true})
+    (wrap-params)
+    (wrap-json-response)
+    (wrap-cors app-routes #".*")
+    (wrap-cors app-routes identity)))
 
 (defn start-server []
-  (run-jetty app-routes
+  (run-jetty app
     { :port 8080
       :ssl? true
       :ssl-port 8081
