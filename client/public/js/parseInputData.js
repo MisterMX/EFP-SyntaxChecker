@@ -14,8 +14,6 @@ function readTasks() {
             var text = document.createTextNode(opt);
 
             link.appendChild(text);
-            link.href = "#";
-
             link.onclick = function () {
                 createTriggerTable(opt);
                 // reset the field
