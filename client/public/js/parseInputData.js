@@ -28,7 +28,7 @@ function readTasks() {
 function createTriggerTable(triggerName) {
     var body = "<table class='table table-hover' id='triggerTable'>";
     body += "<thead>";
-    body += "<tr><th>Trigger</th><th>Info</th><th>Success</th></tr>";
+    body += "<tr><th>Triggername</th><th>Message</th><th>Success</th></tr>";
     body += "</thead>";
     body += "<tbody>";
     // parse JSON with jQuery
@@ -37,8 +37,9 @@ function createTriggerTable(triggerName) {
             if (data[i].name == triggerName) {
                 for (var j = 0; j < data[i].triggers.length; j++) {
                     body += "<tr>";
-                    body += "<td>" + j + 1 + "</td>";
+                    // TODO - triggername not working here
                     body += "<td>" + data[i].triggers[j] + "</td>";
+                    body += "<td> - </td>";
                     body += "<td><img src='img/icons/working.png' width='50px' height='50px'</td>";
                     body += "</tr>";
                 }
@@ -77,7 +78,7 @@ function readMultipleFiles(evt) {
 }
 
 function uploadJSON() {
-    alert(JSON.stringify(jsonUpload));
+    // alert(JSON.stringify(jsonUpload));
     // upload data to server
     $.ajax({
         url: 'http://localhost:8080/api/execute',
@@ -86,8 +87,36 @@ function uploadJSON() {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function (data) {
-            
-            // TODO - get the result from server in callback
+
+            // alert(JSON.stringify(data));
+            // get the result from server in callback
+            displayValidationResponse(data);
         },
     });
+}
+
+function displayValidationResponse(data) {
+    var body = "<table class='table table-hover' id='triggerTable'>";
+    body += "<thead>";
+    body += "<tr><th>Triggername</th><th>Message</th><th>Success</th></tr>";
+    body += "</thead>";
+    body += "<tbody>";
+
+    for (var i = 0; i < data.length; i++) {
+        body += "<tr>";
+        body += "<td>" + data[i].name + "</td>";
+        body += "<td>" + data[i].message + "</td>";
+
+        if (data[i]['success?']) {
+            body += "<td><img src='img/icons/success.png' width='50px' height='50px'</td>";
+        } else {
+            body += "<td><img src='img/icons/failed.png' width='50px' height='50px'</td>";
+        }
+
+        body += "</tr>";
+    }
+
+    body += "</tbody>";
+    body += "</table>";
+    document.getElementById("triggerTable").innerHTML = body;
 }
