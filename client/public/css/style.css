@@ -48,3 +48,12 @@ footer a:hover {
     color: #777;
     text-decoration: none;
 }
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+}
