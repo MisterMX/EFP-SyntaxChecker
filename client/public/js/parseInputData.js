@@ -7,8 +7,8 @@ function readTasks() {
     var list = document.getElementById("taskSelector");
 
     $.getJSON("http://localhost:8080/api/tasks", function (data) {
-        for (var i = 0; i < data.length; i++) {
-            var opt = data[i].name;
+        data.forEach(function(element) {
+            var opt = element.name;
             var li = document.createElement("li");
             var link = document.createElement("a");
             var text = document.createTextNode(opt);
@@ -21,8 +21,8 @@ function readTasks() {
             };
             li.appendChild(link);
             list.appendChild(li);
-        }
-    })
+        });
+    });
 }
 
 function createTriggerTable(triggerName) {
