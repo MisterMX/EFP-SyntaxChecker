@@ -5,15 +5,15 @@
 
 ; Define the tasks that are offered by this webservice here:
 (def task-map {
-  :task1 {
-    :name "task1"
+  :exercise1 {
+    :name "Aufgabe 1"
     :triggers {
-      :trigger1 {
-        :handler task1/task1Handler
-        :errorMsg "Error"}
-      :trigger2 {
-        :handler task1/task2Handler
-        :errorMsg "Error"}}
+      :taskClassName {
+        :handler task1/taskClassName
+        :errorMsg "Class name must be 'FileServer'."}
+      :packageName {
+        :handler task1/packageName
+        :errorMsg "Class must be in package 'var'."}}
   }
   :task2 {
     :name "task2"

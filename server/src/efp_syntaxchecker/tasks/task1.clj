@@ -1,9 +1,17 @@
-(ns efp_syntaxchecker.tasks.task1)
+; Task handlers for EFP "Augabe 1"
 
-(defn task1Handler
-  [files]
-  true)
+(ns efp_syntaxchecker.tasks.task1
+  (:require
+    [efp_syntaxchecker.tasks.taskutil :as taskutil]))
 
-(defn task2Handler
-  [files]
-  false)
+(defn taskClassName [files]
+   (re-matches
+    (taskutil/removeJavaComments 
+      (taskutil/getFileByName "FileServer.java" files))
+    #"class\s+FileServer"))
+
+(defn packageName [files]
+   (re-matches
+    (taskutil/removeJavaComments 
+      (taskutil/getFileByName "FileServer.java" files))
+    #"package\s+var"))
