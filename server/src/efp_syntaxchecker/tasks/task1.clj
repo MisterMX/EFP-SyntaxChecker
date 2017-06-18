@@ -5,13 +5,15 @@
     [efp_syntaxchecker.tasks.taskutil :as taskutil]))
 
 (defn taskClassName [files]
-   (re-matches
-    (taskutil/removeJavaComments 
-      (taskutil/getFileByName "FileServer.java" files))
-    #"class\s+FileServer"))
+  (boolean
+    (re-find
+      #"class\s+FileServer"
+      (taskutil/removeJavaComments 
+        (:content (taskutil/getFileByName "FileServer.java" files))))))
 
 (defn packageName [files]
-   (re-matches
-    (taskutil/removeJavaComments 
-      (taskutil/getFileByName "FileServer.java" files))
-    #"package\s+var"))
+  (boolean
+    (re-find
+      #"package\s+var"
+      (taskutil/removeJavaComments 
+        (:content (taskutil/getFileByName "FileServer.java" files))))))
