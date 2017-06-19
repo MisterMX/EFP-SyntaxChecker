@@ -3,6 +3,8 @@
       [efp_syntaxchecker.tasks.task1 :as task1]
       [efp_syntaxchecker.tasks.task2 :as task2]))
 
+(def redirect-url-base "https://localhost:8079")
+
 ; Define the tasks that are offered by this webservice here:
 (def task-map [
   {
