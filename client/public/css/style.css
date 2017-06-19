@@ -57,3 +57,7 @@ footer a:hover {
   position: absolute;
   right: 0;
 }
+
+.textalign-left {
+    text-align: left;
+}

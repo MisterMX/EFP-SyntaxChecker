@@ -1,21 +1,22 @@
 (ns efp_syntaxchecker.task-execution
   (:require [efp_syntaxchecker.config-util :as config-util]))
 
-(defn executeTrigger [trigger triggerName files]
+(defn executeTrigger [trigger files]
   (if ((:handler trigger) files)
     {
-      :name triggerName
+      :name (:id trigger)
       :success? true
+      :message (:description trigger)
     }
     {
-      :name triggerName
+      :name (:id trigger)
       :success? false
-      :message (:errorMsg trigger)
+      :message (:description trigger)
     }))
 
 (defn executeTask [task files]
   (map
-    (fn [[triggerName trigger]] (executeTrigger trigger triggerName files))
+    #(executeTrigger % files)
     (:triggers task)))
 
 (defn executeTaskRequest [requestBody]

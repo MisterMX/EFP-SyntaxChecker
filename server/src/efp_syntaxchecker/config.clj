@@ -4,31 +4,52 @@
       [efp_syntaxchecker.tasks.task2 :as task2]))
 
 ; Define the tasks that are offered by this webservice here:
-(def task-map {
-  :exercise1 {
+(def task-map [
+  {
+    :id "exercise1"
     :name "Aufgabe 1"
-    :triggers {
-      :taskClassName {
+    :triggers [
+      {
+        :id "exercise1.trigger.className"
+        :displayName "Class name"
         :handler task1/triggerClassName
-        :errorMsg "Class name must be 'FileServer'."}
-      :packageName {
-        :handler task1/triggerPackageName
-        :errorMsg "Class must be in package 'var' or in one of its subpackages."}
-      :properties {
-        :handler task1/triggerProperties
-        :errorMsg "Queue must be configured in file 'jndi.properties' with the key 'queue.files'."}
-      :textMessage {
-        :handler task1/triggerTextMessage
-        :errorMsg "Server must use the class 'TextMessage'"}
+        :description "Class name must be 'FileServer'."
       }
+      {
+        :id "exercise1.trigger.packageName"
+        :displayName "Package name"
+        :handler task1/triggerPackageName
+        :description "Class must be in package 'var' or in one of its subpackages."
+      }
+      {
+        :id "exercise1.trigger.properties"
+        :displayName "Package name"
+        :handler task1/triggerProperties
+        :description "Queue must be configured in file 'jndi.properties' with the key 'queue.files'."
+      }
+      {
+        :id "exercise1.trigger.textMessage"
+        :displayName "TextMessage"
+        :handler task1/triggerTextMessage
+        :description "Server must use the class 'TextMessage'"
+      }
+    ]
   }
-  :task2 {
-    :name "task2"
-    :triggers {
-      :trigger1 {
+  {
+    :id "exercise2"
+    :name "Aufgabe 2"
+    :triggers [
+      {
+        :id "exercise2.trigger.textMessage"
+        :displayName "TextMessage"
         :handler task2/task1Handler
-        :errorMsg "Error"}
-      :trigger2 {
+        :errorMsg "Error"
+      }
+      {
+        :id "exercise2.trigger.textMessage"
+        :displayName "TextMessage"
         :handler task2/task2Handler
-        :errorMsg "Error"}}
-  }})
+        :errorMsg "Error"
+      }
+    ]
+  }])
