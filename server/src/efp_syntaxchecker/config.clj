@@ -40,16 +40,28 @@
     :name "Aufgabe 2"
     :triggers [
       {
-        :id "exercise2.trigger.textMessage"
-        :displayName "TextMessage"
-        :handler task2/task1Handler
-        :errorMsg "Error"
+        :id "exercise2.trigger.chatclient"
+        :displayName "ChatClient"
+        :handler task2/triggerChatClient
+        :description "Class 'ChatClient' must be in package 'var.rmi.chat'."
       }
       {
-        :id "exercise2.trigger.textMessage"
-        :displayName "TextMessage"
-        :handler task2/task2Handler
-        :errorMsg "Error"
+        :id "exercise2.trigger.chatserver"
+        :displayName "ChatServer"
+        :handler task2/triggerChatServer
+        :description "Class 'ChatServer' must be in package 'var.rmi.chat'."
+      }
+      {
+        :id "exercise2.trigger.conf"
+        :displayName "Conf"
+        :handler task2/triggerConf
+        :description "Interface or class 'Conf' must contain the static final field 'CHATSERVICE'."
+      }
+      {
+        :id "exercise2.trigger.useconf"
+        :displayName "Use conf in ChatClient"
+        :handler task2/triggerUseConf
+        :description "'Conf.CHATSERVICE' must be used in class 'ChatClient'."
       }
     ]
   }])

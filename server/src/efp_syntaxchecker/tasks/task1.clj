@@ -1,4 +1,4 @@
-; Task handlers for EFP "Augabe 1"
+; Triggers for EFP "Augabe 1"
 
 (ns efp_syntaxchecker.tasks.task1
   (:require
