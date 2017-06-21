@@ -6,7 +6,7 @@ var jsonUpload = {
 function readTasks() {
     var list = document.getElementById('taskSelector');
 
-    $.getJSON('http://localhost:8080/api/tasks', function (data) {
+    $.getJSON('https://localhost:8081/api/tasks', function (data) {
         data.forEach(function(element) {
             var opt = element.name;
             var li = document.createElement('li');
@@ -32,7 +32,7 @@ function createTriggerTable(taskName) {
     body += '</thead>';
     body += '<tbody>';
     // parse JSON with jQuery
-    $.getJSON('http://localhost:8080/api/tasks', function (data) {
+    $.getJSON('https://localhost:8081/api/tasks', function (data) {
         for (var i = 0; i < data.length; i++) {
             if (data[i].name == taskName) {
                 for (var j = 0; j < data[i].triggers.length; j++) {
@@ -81,7 +81,7 @@ function uploadJSON() {
     // alert(JSON.stringify(jsonUpload));
     // upload data to server
     $.ajax({
-        url: 'http://localhost:8080/api/execute',
+        url: 'https://localhost:8081/api/execute',
         type: 'POST',
         data: JSON.stringify(jsonUpload),
         contentType: 'application/json; charset=utf-8',
