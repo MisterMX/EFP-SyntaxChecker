@@ -25,7 +25,7 @@ function readTasks() {
     });
 }
 
-function createTriggerTable(taskName) {
+function createTriggerTable(taskName, markError) {
     var body = '<table class="table table-hover" id="triggerTable">';
     body += '<thead>';
     body += '<tr><th>Triggername</th><th>Message</th><th>Success</th></tr>';
@@ -40,7 +40,12 @@ function createTriggerTable(taskName) {
                     // TODO - triggername not working here
                     body += '<td class="textalign-left">' + data[i].triggers[j].name + '</td>';
                     body += '<td class="textalign-left">' + data[i].triggers[j].description + '</td>';
-                    body += '<td><img src="img/icons/working.png" width="50px" height="50px"</td>';
+
+                    if (markError) {
+                        body += '<td><img src="img/icons/failed.png" width="50px" height="50px"</td>';
+                    } else {
+                        body += '<td><img src="img/icons/working.png" width="50px" height="50px"</td>';
+                    }
                     body += '</tr>';
                 }
             }
@@ -92,6 +97,9 @@ function uploadJSON() {
             // get the result from server in callback
             displayValidationResponse(data);
         },
+        error: function() {
+            createTriggerTable(jsonUpload.taskName, true);
+        }
     });
 }
 
@@ -104,8 +112,8 @@ function displayValidationResponse(data) {
 
     for (var i = 0; i < data.length; i++) {
         body += '<tr>';
-        body += '<td>' + data[i].name + '</td>';
-        body += '<td>' + data[i].message + '</td>';
+        body += '<td class="textalign-left">' + data[i].name + '</td>';
+        body += '<td class="textalign-left">' + data[i].message + '</td>';
 
         if (data[i]['success?']) {
             body += '<td><img src="img/icons/success.png" width="50px" height="50px"</td>';
