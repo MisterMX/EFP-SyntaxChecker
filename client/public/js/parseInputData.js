@@ -85,6 +85,9 @@ function readMultipleFiles(evt) {
 function uploadJSON() {
     // alert(JSON.stringify(jsonUpload));
     // upload data to server
+
+    jsonUpload.oauth_consumer_key = searchParams['oauth_consumer_key'];
+
     $.ajax({
         url: 'https://localhost:8081/api/execute',
         type: 'POST',

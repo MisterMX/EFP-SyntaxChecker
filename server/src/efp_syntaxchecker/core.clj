@@ -19,7 +19,7 @@
   (POST "/api/execute" {body :body} (response (task-execution/executeTaskRequest body)))
   ; Moodle request is application/urlencoded -> data is in :params.
   ; Use 'get' to get an entry from params.
-  (POST "/lti/launch" {params :params} (lti/createRedirect params))
+  (POST "/lti/launch" {params :params headers :headers} (lti/createRedirect params headers))
   (route/not-found "Page not found"))
 
 ;---

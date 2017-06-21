@@ -106,6 +106,23 @@
 
     <!-- smooth Website scrolling -->
     <script>
+        var searchParams;
+
+        function getSearchParameters() {
+            var searchString = window.location.search.substring(1),
+                params = searchString.split('&');
+            
+            var result = {};
+
+            for (var i = 0; i < params.length;i++) {
+                var val = params[i].split('=');
+
+                result[val[0]] = val[1];
+            }
+
+            return result;;
+        }
+
         $(document).ready(function() {
             // Initialize Tooltip
             $('[data-toggle="tooltip"]').tooltip();
@@ -127,8 +144,11 @@
                     });
                 }
             });
-        })
 
+            // Read URL query string
+            searchParams = getSearchParameters();
+            console.log(JSON.stringify(searchParams));
+        })
     </script>
 
 </body>
