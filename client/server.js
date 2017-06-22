@@ -1,10 +1,17 @@
 var express = require('express');
 var app = express();
+
+var https = require('https');
+
 var morgan = require('morgan');
 var path = require('path'); 
 
 // Initialize variables. 
 var port = process.env.PORT || 8079; 
+
+var fs = require('fs');
+var privateKey = fs.readFileSync('/opt/certificate/jetty.key');
+var certificate = fs.readFileSync('/opt/certificate/jetty.crt');
 
 // Configure morgan module to log all requests.
 app.use(morgan('dev')); 
@@ -19,5 +26,12 @@ app.get('*', function (req, res) {
 });
 
 // Start the server.  
-app.listen(port);
+https
+	.createServer({
+			cert: certificate,
+			key: privateKey,
+			passphrase: 'efpss17'},
+		app)
+	.listen(port);
+
 console.log('Listening on port ' + port + '...'); 
