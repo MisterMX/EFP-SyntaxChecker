@@ -3,6 +3,8 @@
         ring.adapter.jetty
         ring.util.response)
   (:require 
+    [efp_syntaxchecker.lti :as lti]
+    [efp_syntaxchecker.config :as config]
     [efp_syntaxchecker.config-util :as config-util]
     [efp_syntaxchecker.task-execution :as task-execution]
     [compojure.core :refer :all]
@@ -14,9 +16,10 @@
 
 (defroutes app-routes
   (GET "/api/tasks" [] (response (config-util/getTaskList)))
-  (POST "/api/execute" {body :body} (response (task-execution/executeTaskRequest body)))
+  (POST "/api/execute" {body :body params :params} (response (task-execution/executeTaskRequest body params)))
   ; Moodle request is application/urlencoded -> data is in :params.
-  (POST "/api" {params :params {userId :user_id} :body} (response {:user_id userId :params params}))
+  ; Use 'get' to get an entry from params.
+  (POST "/lti/launch" {params :params headers :headers} (lti/createRedirect params headers))
   (route/not-found "Page not found"))
 
 ;---
