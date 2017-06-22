@@ -39,6 +39,11 @@
                 <a class="navbar-brand" href="#home">EFP-SyntaxChecker</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
+                </div class="hidden" id="userField">
+                    <span>You are logged in via Moodle as: </span>
+                    <span id="userName"></span>
+                </div>
+                <div class=hidden id="guestField">Guest mode</div>
             </div>
         </div>
     </nav>
@@ -102,6 +107,7 @@
         <a class="up-arrow" href="#home" data-toggle="tooltip" title="top">
             <span class="glyphicon glyphicon-chevron-up"></span>
         </a><br><br>
+        <span>Developed for EFP at HS Mannheim in 2017</span>
     </footer>
 
     <!-- smooth Website scrolling -->
@@ -147,6 +153,14 @@
 
             // Read URL query string
             searchParams = getSearchParameters();
+
+            if (searchParams['lis_person_name_given']) {
+                $('#userName').html(searchParams['lis_person_name_given'] + ' ' + searchParams['lis_person_name_family']);
+                $('#userField').removeClass('hidden');
+            } else {
+                $('#guestField').removeClass('hidden');
+            }
+
             console.log(JSON.stringify(searchParams));
         })
     </script>

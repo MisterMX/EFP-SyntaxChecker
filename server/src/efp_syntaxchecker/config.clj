@@ -33,7 +33,7 @@
         :id "exercise1.trigger.textMessage"
         :displayName "TextMessage"
         :handler task1/triggerTextMessage
-        :description "Server must use the class 'TextMessage'"
+        :description "Server must use the class 'TextMessage'."
       }
     ]
   }

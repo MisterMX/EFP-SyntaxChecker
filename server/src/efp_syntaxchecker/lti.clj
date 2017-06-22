@@ -6,7 +6,14 @@
   (:require
     [efp_syntaxchecker.config :as config]))
 
-(defn createRedirect [params headers]
+(defn calculateGrade [executionResult]
+  (format
+    "%1$.1f"
+    (/ 
+      (float (count (filter #(:success? %) executionResult)))
+      (float (count executionResult)))))
+
+(defn sendOutcome [executionResult outcome-service-url result-sourcedid]
   ; Send outcome request to Moodle and print response.
   (println
     (IOUtils/toString
@@ -15,15 +22,19 @@
           (.execute
             (DefaultHttpClient.) 
             (IMSPOXRequest/buildReplaceResult
-              (get params "lis_outcome_service_url")
+              outcome-service-url
               "efpss17"
               "efpss17"
-              (get params "lis_result_sourcedid")
+              result-sourcedid
               "1.0"
               nil
-              false))))))
+              false)))))))
+
+(defn createRedirect [params headers]
   (redirect
     (str
       config/redirect-url-base
       "?lis_outcome_service_url=" (get params "lis_outcome_service_url") "&"
-      "lis_result_sourcedid=" (get params "lis_result_sourcedid"))))
+      "lis_result_sourcedid=" (get params "lis_result_sourcedid") "&"
+      "lis_person_name_given=" (get params "lis_person_name_given") "&"
+      "lis_person_name_family=" (get params "lis_person_name_family"))))

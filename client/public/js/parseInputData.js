@@ -83,13 +83,14 @@ function readMultipleFiles(evt) {
 }
 
 function uploadJSON() {
-    // alert(JSON.stringify(jsonUpload));
-    // upload data to server
+    var executeUrl = 'https://localhost:8081/api/execute';
 
-    jsonUpload.oauth_consumer_key = searchParams['oauth_consumer_key'];
+    if (searchParams['lis_outcome_service_url']) {
+        executeUrl += '?lis_outcome_service_url=' + searchParams['lis_outcome_service_url'] + '&lis_result_sourcedid=' + searchParams['lis_result_sourcedid'];
+    }
 
     $.ajax({
-        url: 'https://localhost:8081/api/execute',
+        url: executeUrl,
         type: 'POST',
         data: JSON.stringify(jsonUpload),
         contentType: 'application/json; charset=utf-8',

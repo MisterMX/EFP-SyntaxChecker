@@ -61,3 +61,7 @@ footer a:hover {
 .textalign-left {
     text-align: left;
 }
+
+.hidden {
+    display: none !important;
+}
