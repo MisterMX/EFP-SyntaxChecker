@@ -26,7 +26,7 @@
               "efpss17"
               "efpss17"
               result-sourcedid
-              "1.0"
+              (calculateGrade executionResult)
               nil
               false)))))))
 
