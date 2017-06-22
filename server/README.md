@@ -45,7 +45,7 @@ Response body format:
     {
         "name": <triggername>,
         "success": <true|false>,
-        "message": <string (if success === false)>
+        "message": <string>
     },
     ...
 ]
