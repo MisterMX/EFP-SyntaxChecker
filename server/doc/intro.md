@@ -2,7 +2,7 @@
 
 **EFP SoSe 2017**
 
-Philipp Minges \
+Philipp Minges 1426312
 Maximilian Blatt 1423983
 
 ## Projektstruktur
@@ -13,7 +13,7 @@ Der Client hört auf Port 8079 (Https), während der Webservice über die Ports 
 
 ### Client
 
-Der Client wird über einen NodeJs Webserver ausgeliefert. Da die Details seiner Implementierung nicht Bestandteil der Aufgabe ist, wird dieser auch nicht erläutert.
+Der Client wird über einen NodeJs Webserver ausgeliefert. Da die Details seiner Implementierung nicht Bestandteil der Aufgabe ist, wird dieser auch nicht erläutert. Der Client dient der Eingabe der Daten, deren Konvertierung in ein JSON Dateiformat und der Auslieferung der Ergebnisse.
 
 Um den Client vorzubereiten benötigt man ein installiertes NodeJs und Bower mit denen die einzelnen Packages installiert werden. Der Server wird dann gestartet mit
 ```
@@ -43,8 +43,6 @@ Der Webservice ist wie folgt aufgebaut:
 Dieser Abschnitt enthält die Dokumentation der REST-Schnittstelle des Webservice.
 
 ##### GET ```/api/tasks```
-
-Gets a list of all task and there triggers.
 
 Liefert eine Liste aller Aufgaben und ihrer Fehlerklassen, die vom Webservice angeboten werden.
 
