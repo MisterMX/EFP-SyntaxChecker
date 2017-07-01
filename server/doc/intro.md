@@ -164,3 +164,9 @@ Dieser kann nun einen auswählen und zusammen mit einer beliebigen Anzahl an Dat
 Der Server führt nun den spezifizierten Task aus und sendet das Ergebnis zurück. Sollte die LTI Parameter mitgeschickt werden, wird für der Antwort ein Outcome Request an Moodle geschickt, welcher die erreichte Note enthält.
 
 Die Note ist eine Zahl zwischen 0.0 und 1.0, welche den Anteil der bestanden Fehlerklassen an der gesamten Zahl der Fehlerklassen enthält.
+
+### Kompatibilität
+
+Das Projekt wurde auf einem Ubuntu Linux 17.04 System erfolgreich getestet. 
+
+Es kann jedoch nach der Installation von NodeJS und Leiningen auch auf den Betriebssystemen Windows und MacOS ausgeführt werden.
