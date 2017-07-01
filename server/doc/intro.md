@@ -7,9 +7,13 @@ Maximilian Blatt 1423983
 
 ## Projektstruktur
 
-Das Projekt ist aufgeteilt in einen Webservice (Clojure) und einen Webclient (JavaScript) aufgeteilt. Es ist eine integration in Moodle möglich, beide können jedoch auch unabhängig davon betrieben werden.
+Das Projekt ist in einen Webservice (Clojure) und einen Webclient (JavaScript) aufgeteilt. Es ist eine integration in Moodle möglich, beide können jedoch auch unabhängig davon betrieben werden.
 
-Der Client hört auf Port 8079 (Https), während der Webservice auf den Ports 8080 (Http) und 8081 (Https) lauscht.
+Der Client lauscht auf Port 8079 (Https), während der Webservice auf den Ports 8080 (Http) und 8081 (Https) lauscht.
+
+Der Webservice bietet Schnittstellen für den Webclient, als auch für die Moodle LTI.
+
+![](structure.png)
 
 ### Client (Javascript Webclient)
 
