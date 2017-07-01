@@ -7,20 +7,48 @@ Maximilian Blatt 1423983
 
 ## Projektstruktur
 
-Das Projekt ist aufgeteilt in einen Webservice (Clojure) und einen Webclient (JavaScript) aufgeteilt. Es ist eine integration in Moodle möglich, beide können jedoch unabhängig davon betrieben werden.
+Das Projekt ist aufgeteilt in einen Webservice (Clojure) und einen Webclient (JavaScript) aufgeteilt. Es ist eine integration in Moodle möglich, beide können jedoch auch unabhängig davon betrieben werden.
 
-Der Client hört auf Port 8079 (Https), während der Webservice über die Ports 8080 (Http) und 8081 (Https) läuft.
+Der Client hört auf Port 8079 (Https), während der Webservice auf den Ports 8080 (Http) und 8081 (Https) lauscht.
 
-### Client
+### Client (Javascript Webclient)
 
-Der Client wird über einen NodeJs Webserver ausgeliefert. Da die Details seiner Implementierung nicht Bestandteil der Aufgabe ist, wird dieser auch nicht erläutert. Der Client dient der Eingabe der Daten, deren Konvertierung in ein JSON Dateiformat und der Auslieferung der Ergebnisse.
+Der Client wird über einen NodeJs Webserver ausgeliefert. Der Client dient der Darstellung der Aufgaben und deren Fehlerklassen, der Eingabe der zu überprüfenden Daten, deren Konvertierung in ein JSON Dateiformat und der Auslieferung der Ergebnisse.
 
-Um den Client vorzubereiten benötigt man ein installiertes NodeJs und Bower mit denen die einzelnen Packages installiert werden. Der Server wird dann gestartet mit
+#### Start
+
+Um den Client vorzubereiten benötigt man ein installiertes NodeJs und Bower mit denen die einzelnen Packages installiert werden. Der Server wird gestartet mit
+
 ```
 npm start
 ```
 
-### Webservice
+#### Funktionalität
+
+Beim Aufruf Clients, führt dieser die Funktion ```readTasks()``` aus. Dabei wird ein GET Request auf die Webservice URL ```/api/tasks``` ausgefürt. Anschließend erhält der Client ein JSON Objekt aller Aufgaben (Tasks) und deren Fehlerklassen (Trigger). 
+
+Nach der Auswahl einer Aufgabe wird mit Hilfe der Funktion ```createTriggerTable(triggerName)``` aus dem JSON Objekt des Tasks eine HTML Tabelle erstellt, welche die Fehlerklassen repräsentiert.
+
+Vor dem Upload der Daten werden diese zuerst in ein JSON Format gebracht. Der Webclient erhält die Daten vom Browser via HTML multipart/form-data. Anschließend wird die Funktion ```uploadJSON()``` genutzt um zuerst aus dem Namen und dem Inhalt des Objekts die folgende Objektstruktur zur weiterverarbeitung zu erzeugen
+
+```
+{
+    taskName: <taskName>,
+    files: [
+        <filename>: <content>,
+        <content> : <filecontent>
+        ...
+    ]
+}
+```
+
+und anschließend das Objekt mit einem POST an die Webservice URL ```/api/execute``` zu senden. 
+
+Hierbei werden optional die Moodle Parameter in der URL zum Webservice übermittelt. Siehe [Webservice API](#moodle-params).
+
+Die Visualisierung der Antwort des Webservice findet in der Funktion ```displayValidationResponse(data)``` statt.
+
+### Server (Clojure Webservice)
 
 Der in Clojure progammierte Webservice ist die zentrale Komponente des Projekts. Hier folgt eine genauere Erläuterung seiner Funktionen.
 
@@ -61,10 +89,7 @@ Response Format:
     ...
 ]
 ```
-
-##### POST ```/api/execute?lis_outcome_service_url=<value>&lis_result_sourcedid=<value>```
-
-Führt einen gegeben Task aus.
+##### <a name="moodle-params"></a>POST ```/api/execute?lis_outcome_service_url=<value>&lis_result_sourcedid=<value>```
 
 Die URL-Parameter sind optional. Bei ihrem Vorhandensein wird die Bewertung (Prozent der abgeschlossenen Aufgaben) zusätzlich an Moodle übermittelt.
 
@@ -74,6 +99,7 @@ Request Format:
     taskName: <taskName>,
     files: [
         <filename>: <content>,
+        <content> : <filecontent>
         ...
     ]
 }
@@ -167,6 +193,6 @@ Die Note ist eine Zahl zwischen 0.0 und 1.0, welche den Anteil der bestanden Feh
 
 ### Kompatibilität
 
-Das Projekt wurde auf einem Ubuntu Linux 17.04 System erfolgreich getestet. 
+Das Projekt wurde auf einem Ubuntu Linux 17.04 System getestet. 
 
 Es kann jedoch nach der Installation von NodeJS und Leiningen auch auf den Betriebssystemen Windows und MacOS ausgeführt werden.
