@@ -15,6 +15,7 @@ Used to read the tasks from the backend and create the trigger table from it.
 ```
 function readTasks()
 ```
+
 Creates the HTML Table from the selected Task.
 ```
 function createTriggerTable(triggerName)
@@ -27,30 +28,19 @@ Executes a given task.
 function uploadJSON()
 ```
 
-Uploads the Data in the following JSON format. Example:
+Uploads the Data in the following JSON format
 ```
-{ "taskName" : "task2",
-  "files" : [ 
-    { "filename" : "project.clj",
-      "content" : "(defproject my-website \"0.1.0-SNAPSHOT\"\n
-        :description \"FIXME: write this!\"\n
-        :dependencies [[org.clojure/clojure \"1.4.0\"]\n
-        [noir \"1.3.0-beta3\"]]\n
-        :main my-website.server)\n
-        \n
-        "}]}
+{
+    taskName: <taskName>,
+    files: [
+        <filename>: <content>,
+        <content> : <filecontent>
+        ...
+    ]
+}
 ```
 
-Visualization of the response is done in
+Visualization of response
 ```
 function displayValidationResponse(data)
-```
-
-## Bugs/Todo
-
-- HTTPS Webserver for moodle integration
-
-GET Method http://localhost:8080/api/tasks does not give the array of trigger and their names.
-```
-[{"name":"task1","triggers":["triggers"]},{"name":"task2","triggers":["triggers"]}]
 ```
